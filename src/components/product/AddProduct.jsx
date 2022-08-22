@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   FormControl,
+  Input,
   InputLabel,
   MenuItem,
   Select,
@@ -12,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import { useProducts } from "../../contexts/ProductContextProvider";
 
 const AddProduct = () => {
-  const { getCategories, categories, addProduct } = useProducts();
+  const { getCategories, categories, addProducts } = useProducts();
 
   const [product, setProduct] = useState({
     title: "",
@@ -42,6 +43,16 @@ const AddProduct = () => {
 
   console.log(categories);
 
+  function handleSave() {
+    let newProduct = new FormData();
+    newProduct.append("title", product.title);
+    newProduct.append("description", product.description);
+    newProduct.append("price", product.price);
+    newProduct.append("category", product.category);
+    newProduct.append("image", product.image);
+    addProducts(newProduct);
+  }
+
   return (
     <Box
       sx={{
@@ -63,6 +74,8 @@ const AddProduct = () => {
         variant="outlined"
         fullWidth
         name="title"
+        onChange={handleInp}
+        value={product.title}
       />
       <TextField
         sx={{ m: 1 }}
@@ -71,6 +84,8 @@ const AddProduct = () => {
         variant="outlined"
         fullWidth
         name="description"
+        onChange={handleInp}
+        value={product.description}
       />
       <TextField
         sx={{ m: 1 }}
@@ -79,6 +94,8 @@ const AddProduct = () => {
         variant="outlined"
         fullWidth
         name="price"
+        onChange={handleInp}
+        value={product.price}
       />
       {/* <TextField
         sx={{ m: 1 }}
@@ -94,9 +111,10 @@ const AddProduct = () => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={product.category}
-          label="Age"
+          label="сфеупщкн"
           onChange={handleInp}
+          value={product.category}
+          name="category"
         >
           {categories?.map((item) => (
             <MenuItem value={item.id} key={item.id}>
@@ -109,14 +127,22 @@ const AddProduct = () => {
           <MenuItem value={30}>Thirty</MenuItem> */}
         </Select>
       </FormControl>
-      <TextField
+      {/* <TextField
         sx={{ m: 1 }}
         id="standard-basic"
         label="Image"
         variant="outlined"
         fullWidth
         name="image"
+      /> */}
+
+      <input
+        type="file"
+        // hidden
+        name="image"
+        onChange={handleInp}
       />
+
       <Button
         sx={{
           m: 1,
@@ -124,6 +150,7 @@ const AddProduct = () => {
         variant="outlined"
         fullWidth
         size="large"
+        onClick={handleSave}
       >
         ADD PRODUCT
       </Button>

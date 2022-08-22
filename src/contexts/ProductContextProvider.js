@@ -41,7 +41,7 @@ const ProductContextProvider = ({ children }) => {
       const token = JSON.parse(localStorage.getItem("token"));
       const Authorization = `Bearer ${token.access}`;
       const config = {
-        header: {
+        headers: {
           Authorization,
         },
       };
@@ -64,7 +64,7 @@ const ProductContextProvider = ({ children }) => {
       const token = JSON.parse(localStorage.getItem("token"));
       const Authorization = `Bearer ${token.access}`;
       const config = {
-        header: {
+        headers: {
           Authorization,
         },
       };
@@ -85,7 +85,7 @@ const ProductContextProvider = ({ children }) => {
       const token = JSON.parse(localStorage.getItem("token"));
       const Authorization = `Bearer ${token.access}`;
       const config = {
-        header: {
+        headers: {
           Authorization,
         },
       };
@@ -102,7 +102,7 @@ const ProductContextProvider = ({ children }) => {
       const token = JSON.parse(localStorage.getItem("token"));
       const Authorization = `Bearer ${token.access}`;
       const config = {
-        header: {
+        headers: {
           Authorization,
         },
       };
