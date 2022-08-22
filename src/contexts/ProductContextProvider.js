@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useContext, useReducer } from "react";
 
 export const productContext = createContext();
@@ -31,6 +32,26 @@ const API = "https://backend-for-fs-makers.herokuapp.com/api/v1";
 
 const ProductContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
+
+  async function getProducts() {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      const Authorization = `Bearer ${token.access}`;
+      const config = {
+        header: {
+          Authorization,
+        },
+      };
+      const res = await axios(`${API}​/products​/`, config);
+      console.log(res);
+      dispatch({
+        type: "GET_PRODUCTS",
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return <productContext.Provider>{children}</productContext.Provider>;
 };
