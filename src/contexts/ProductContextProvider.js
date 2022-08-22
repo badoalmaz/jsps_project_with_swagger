@@ -45,7 +45,10 @@ const ProductContextProvider = ({ children }) => {
           Authorization,
         },
       };
-      const res = await axios(`${API}/products/`, config);
+      const res = await axios(
+        `${API}/products/${window.location.search}`,
+        config
+      );
       console.log(res);
       dispatch({
         type: "GET_PRODUCTS",
