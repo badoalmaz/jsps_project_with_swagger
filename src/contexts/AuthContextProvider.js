@@ -29,15 +29,19 @@ const AuthContextProvider = ({ children }) => {
   const login = async (formData, email) => {
     try {
       const res = await axios.post(`${API}/account/login/`, formData);
+
       console.log(res.data);
+
       localStorage.setItem("token", JSON.stringify(res.data));
       localStorage.setItem("username", email);
+
       setUser(email);
       navigate("/");
     } catch (error) {
       console.log(error);
-      setError("Wrong username or password");
-      //   setError([err.response.data.detail]);
+      console.log([error.response.data.detail]);
+      // setError("Wrong username or password");
+      setError([error.response.data.detail]);
     }
   };
 
